@@ -51,7 +51,6 @@ class OutcropAPI:
     def __init__(self, customHandler: None = None):
         self.customHandler = customHandler
         self.queueEvent = []
-        self.cache = []
     
     def subscribe(self, eventReq: OutcropEvent):
         self.queueEvent.append(eventReq.to_json())
