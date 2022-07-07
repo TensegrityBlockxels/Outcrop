@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./public/outcrop256.png">
+</p>
+
 ## API for Minecraft Bedrock websockets.
 
 
