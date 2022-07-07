@@ -1,13 +1,10 @@
 ## API for Minecraft Bedrock websockets.
 
-### Installation
-- Windows - [install.bat](install.bat)
-- Linux - [install.sh](install.sh)
 
-## Example
+## Example - listening and handling custom events
 ```python3
 import asyncio, websockets
-from core import OutcropEvent, OutcropAPI
+from core import OutcropEvent, OutcropAPI // importing outcrop
 
 def chat(data):
     print(data)
@@ -25,3 +22,23 @@ async def main():
 
 asyncio.run(main())
 ```
+
+
+# Installation
+```cmd
+git clone https://github.com/TensegrityBlockxels/Outcrop.git
+```
+
+- Windows 
+```cmd
+install.bat
+``` 
+- Linux 
+```bash
+install.sh
+```
+
+
+
+## Dependencies
+- websockets == 10.3
