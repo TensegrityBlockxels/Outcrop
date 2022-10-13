@@ -11,20 +11,15 @@
 ## Example - listening and handling custom events
 ```python3
 import asyncio, websockets
-from core import OutcropEvent, OutcropAPI # importing outcrop
+from core import OutcropEvent, OutcropAPI, OutcropEvents
+from core import OutcropEvents
 
 def chat(data):
     print(data)
 
 
-playerMessagesEvent = OutcropEvent() # create Outcrop event object
-playerMessagesEvent.body.eventName = "PlayerMessage" # listen for player messages
-
-playerMessagesListener = OutcropAPI(chat) # set handler to receive responses
-playerMessagesListener.subscribe(playerMessagesEvent) # send websocket
-
 async def main():
-    async with websockets.serve(playerMessagesListener.handle, "", 3001):
+    async with websockets.serve(OutcropAPI().event(OutcropEvents.PlayerMessage).connect(chat).handle, "", 3001):
         await asyncio.Future()
 
 asyncio.run(main())

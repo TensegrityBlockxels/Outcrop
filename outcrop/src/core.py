@@ -46,15 +46,18 @@ class OutcropEvent:
     def to_json(self):
         import json
         return json.dumps(self.to_dict())
+    def setEvent(self, event: OutcropEvents):
+        self.body.eventName = str(event.name)
 
-class OutcropAPI:
-    def __init__(self, customHandler: None = None):
+
+class OutcropHandler:
+    def __init__(self, customHandler: None = None, EventReq: None = None):
         self.customHandler = customHandler
         self.queueEvent = []
-    
-    def subscribe(self, eventReq: OutcropEvent):
-        self.queueEvent.append(eventReq.to_json())
-    
+        print(EventReq)
+        self.queueEvent.append(EventReq.to_json())    
+
+
     async def handle(self, websocket, path):
         import json
 
@@ -68,3 +71,19 @@ class OutcropAPI:
                 self.customHandler(msg)
         except websockets.exceptions.ConnectionClosedError as err:
             print(f"Disconnected:[{err}]")
+
+
+class OutcropAPI(object):
+    def __init__(self):
+        ...
+    
+    def event(self, eventName):
+        Event = OutcropEvent()
+        Event.setEvent(eventName)
+        self.Event = Event
+        print(self.Event)
+        return self
+    def connect(self, customHandler):
+
+        self.handler = OutcropHandler(customHandler, self.Event)
+        return self.handler
